@@ -1,0 +1,63 @@
+name: Update overlays
+
+on:
+  schedule:
+    # Every day at 2:07 UTC: https://crontab.guru/#7_2_*_*_*
+    - cron: "7 2 * * *"
+
+jobs:
+  update-overlays:
+    # Do not run on forks or the template repo itself.
+    if: >
+      (github.repository_owner == 'futureware-tech') &&
+      (github.repository != 'futureware-tech/template')
+    strategy:
+      matrix:
+        use_private_runner:
+          - ${{ contains(fromJSON(
+            '[
+            "futureware-tech/delern",
+            "futureware-tech/fw_ads"
+            ]'), github.repository) }}
+    runs-on: ${{
+      matrix.use_private_runner &&
+      fromJSON('["self-hosted", "macOS"]') ||
+      'ubuntu-latest'
+      }}
+    steps:
+      - uses: actions/checkout@v7
+
+      # Copy over shared workflow overlays.
+      - uses: actions/checkout@v7
+        with:
+          repository: futureware-tech/template
+          # Has to be under the repository directory, otherwise checkout fails.
+          path: tmp/template
+      - run: |
+          rm -rf "tmp/template/.git"
+          cp -rf "tmp/template/." .
+
+      # Copy over repository-specific custom overlay.
+      - uses: actions/checkout@v7
+        with:
+          repository: futureware-tech/overlays
+          path: tmp/overlays
+      - run: |
+          if [ -r OVERLAYS ]; then
+            while read -r overlay; do
+              cp -rf "tmp/overlays/${overlay}/." .
+            done <OVERLAYS
+          fi
+
+      - run: rm -rf tmp
+
+      - name: "Check for changes and create/update PR"
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: "${{ secrets.FASTLANE_UPDATE_GITHUB_TOKEN }}"
+          commit-message: "[auto] update overlays"
+          branch: update-overlays
+          delete-branch: true
+          title: "[auto] update overlays"
+          labels: auto
+          reviewers: dotdoom

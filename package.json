@@ -1,0 +1,51 @@
+{
+  "name": "simulator-action",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Launch an iOS Simulator (and shut it down once the job completes)",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint .",
+    "package": "ncc build src/main.ts --source-map --license licenses.txt",
+    "test": "vitest run",
+    "all": "npm run typecheck && npm run build && npm run format && npm run lint && npm run package && npm test",
+    "print-devices": "node lib/print-devices.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futureware-tech/simulator-action.git"
+  },
+  "keywords": [
+    "actions",
+    "simulator",
+    "ios",
+    "flutter"
+  ],
+  "author": "FutureWare LLC (https://futureware.dev)",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^3.0.1",
+    "semver": "^7.8.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.4",
+    "@types/semver": "^7.8.0",
+    "@vercel/ncc": "^0.45.0",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.3"
+  }
+}

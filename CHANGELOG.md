@@ -1,0 +1,32 @@
+## v6
+
+- Add a `settle_timeout_seconds` option (unset by default, preserving current
+  behavior) to optionally wait, after boot, for the Simulator's background
+  daemon-spawning CPU burst to subside before continuing.
+- Bump NodeJS to 24.
+- Upgrade to native ES modules and modernized toolchain (TypeScript 6, @actions/core 3, Vitest 5, ESLint 10, @vercel/ncc 0.45, Nix flake inputs).
+
+## v5
+
+- Fix flaky boot issues by adding a retry parameter (#563).
+- Print stdout/stderr even if the command fails (#562).
+
+## v4
+
+- Add a `wait_for_boot` option (default false, preserving current behavior) to
+  wait for Simulator to finish booting the requested image before continuing.
+
+## v3
+
+- Breaking: change the default simulator from "model = iPhone 8" to "os = iOS",
+  to avoid re-releasing the action each time the current model gets outdated.
+- Bump NodeJS to 20.
+
+## v2
+
+- Update a few packages for security reasons.
+- Bump NodeJS to 16 (#249).
+
+## v1
+
+- Initial release.

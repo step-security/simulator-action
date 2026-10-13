@@ -1,0 +1,18 @@
+node_modules/
+lib/
+coverage/
+*.lcov
+*.log
+npm-debug.log*
+*.tsbuildinfo
+.npm/
+.eslintcache
+*.tgz
+.env
+.env.*
+.DS_Store
+Thumbs.db
+
+# direnv & nix
+.direnv/
+.pre-commit-config.yaml
