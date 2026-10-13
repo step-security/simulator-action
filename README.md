@@ -12,7 +12,7 @@ self-hosted runners.
 
 ```yaml
 steps:
-  - uses: actions/checkout@v5
+  - uses: actions/checkout@v7
   - uses: step-security/simulator-action@v5
     with:
       model: 'iPhone 16'
@@ -28,7 +28,7 @@ that you'll trust your CI with an Apple ID, it's easier to select one of the
 preinstalled profiles.
 
 For GitHub Actions runners, a fresh list of devices is maintained in the
-[Wiki](https://github.com/step-security/simulator-action/wiki) of this
+[Wiki](https://github.com/futureware-tech/simulator-action/wiki) of this
 project. Note that UDID and OS version can be rather volatile and may change
 when Mac OS updates, so it's recommended to stay with only specifying the model
 or if you really need OS version, leave it on the loose side (e.g.
@@ -57,31 +57,3 @@ a device with Apple Developer account, because a Simulator UDID
 | Name   | Sample values | Description                 |
 | ------ | ------------- | --------------------------- |
 | `udid` | `ABCD-EFGH`   | UDID of the launched device |
-
-## Releasing a New Version
-
-1. **Build and validate:**
-
-   Ensure all checks pass and the bundled [`dist/`](dist/) is up to date:
-
-   ```bash
-   $ npm run all
-   ```
-
-2. **Update Changelog:**
-
-   Move changes from `## unreleased` to the new version section (e.g. `## v7`)
-   in [`CHANGELOG.md`](CHANGELOG.md).
-
-3. **Commit and push:**
-
-   Commit all changes (including [`dist/`](dist/)) and merge into `main`.
-
-4. **Publish Release & Marketplace:**
-
-   - On GitHub, go to **Releases** → **Draft a new release**.
-   - Create a new tag (e.g. `v7`).
-   - Title the release and copy the release notes from
-     [`CHANGELOG.md`](CHANGELOG.md).
-   - Ensure **"Publish this Action to the GitHub Marketplace"** is checked.
-   - Click **Publish release**.

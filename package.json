@@ -1,6 +1,6 @@
 {
   "name": "simulator-action",
-  "version": "0.0.0",
+  "version": "6.0.0",
   "private": true,
   "description": "Launch an iOS Simulator (and shut it down once the job completes)",
   "type": "module",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/futureware-tech/simulator-action.git"
+    "url": "git+https://github.com/step-security/simulator-action.git"
   },
   "keywords": [
     "actions",
@@ -28,10 +28,11 @@
     "ios",
     "flutter"
   ],
-  "author": "FutureWare LLC (https://futureware.dev)",
+  "author": "step-security",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^3.0.1",
+    "axios": "^1.20.0",
     "semver": "^7.8.5"
   },
   "devDependencies": {
