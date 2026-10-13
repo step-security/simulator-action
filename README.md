@@ -13,7 +13,7 @@ self-hosted runners.
 ```yaml
 steps:
   - uses: actions/checkout@v7
-  - uses: step-security/simulator-action@v5
+  - uses: step-security/simulator-action@v6
     with:
       model: 'iPhone 16'
   - run: flutter drive
